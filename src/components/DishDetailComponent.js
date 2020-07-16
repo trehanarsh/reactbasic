@@ -5,39 +5,52 @@ import React, { Component } from 'react';
 class DishDetail extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            selectedDish: this.props
-        }
     }
 
-    renderDish(dish) {
-        if (dish != null)
-            return(
-                <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
-                    <CardBody>
-                      <CardTitle>{dish.name}</CardTitle>
-                      <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+    renderComments(){
+        const z= this.props.dish.comments.map( (coms) => {
+            return(    
+                    <div>
+                        <br></br>
+                      {coms.comment}
+                      <br></br>
+                      --{coms.author}, {coms.date.substring(0,10)}
+                      <br></br>
+                      <br></br>
+                    </div>
+                    
             );
-        else
+        });
+        return(
+            <div>
+            <h4>Comments:</h4>
+            {z}
+            </div>
+        );
+    }
+    render() {
+        
+          if(this.props.dish==null)
             return(
                 <div></div>
             );
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                  <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.state.selectedDish)}
-                  </div>
+          else
+          {
+           
+            return(
+                <div className="col-12 col-md-5 m-1">
+                <Card >
+                    <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+                    <CardBody>
+                      <CardTitle>{this.props.dish.name}</CardTitle>
+                      <CardText>{this.props.dish.description}</CardText>
+                    </CardBody>
+                </Card>
+                {this.renderComments()}
                 </div>
-            </div>
-        );
+                
+            );
+           }
     }
 }
 
