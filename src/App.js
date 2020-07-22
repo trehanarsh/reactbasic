@@ -11,7 +11,6 @@ class App extends Component {
 
   render() {
     return (
-      // <BrowserRouter>
         <Provider store={store}>
         <BrowserRouter>
           <div className="App">
@@ -19,7 +18,6 @@ class App extends Component {
           </div>
         </BrowserRouter>
       </Provider>
-      // {/* </BrowserRouter> */}
     );
   }
 }

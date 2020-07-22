@@ -1,0 +1,106 @@
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
+        Button, Modal, ModalHeader, ModalBody,
+        Form, FormGroup, Input, Label } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
+
+class modalFormed extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.toggleModal = this.toggleModal.bind(this);
+
+        this.state = {
+            isModalOpen: false
+        };   
+    }
+
+    toggleModal() {
+        this.setState({
+          isModalOpen: !this.state.isModalOpen
+        });
+    }
+
+    // render(){
+    //     return(
+    //         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+    //                 <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+    //                 <ModalBody>
+    //                 </ModalBody>
+    //             </Modal>
+    //     );
+    // }
+
+
+}
+
+    function RenderDish({dish}) {
+        return (
+        <div>
+         <Card >
+              <CardImg width="100%" src={dish.image} alt={dish.name} />
+              <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+              </CardBody>
+          </Card>
+        </div>
+        );
+        
+  
+      }
+  
+      function RenderComments({comments}) {
+        const z= comments.map( (coms) => {
+            return(    
+                    <div>
+                        
+                      {coms.comment}
+                      <br></br>
+                      --{coms.author}, {coms.date.substring(0,10)}
+                      <br></br>
+                      <br></br>
+                    </div>
+                    
+            );
+        });
+        return(
+            <div>
+            <h4>Comments:</h4>
+            {z}
+            </div>
+        );
+      }
+  
+      const  DishDetail = (props) => {
+        return (
+            <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>{props.dish.name}</h3>
+                    <hr />
+                </div>                
+            </div>
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
+                    <RenderDish dish={props.dish} />
+                </div>
+                <div className="col-12 col-md-5 m-1">
+                    <RenderComments comments={props.comments} />
+                    <Button outline onClick={<modalFormed/>}> <i class="icon-pencil"></i> Submit Comment</Button>
+                </div>
+            </div>
+            </div>
+        );   
+        
+      }
+
+
+ export default DishDetail; 
