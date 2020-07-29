@@ -6,3 +6,4 @@ export const Leaders = (state = LEADERS, action) => {
           return state;
       }
 };
+

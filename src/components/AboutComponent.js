@@ -1,9 +1,11 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({leader}) {
     return (
+    <Stagger in>
     <Media>
         <Media left top href="#" className="col-2 mb-5">
           <Media object src={leader.image} alt={leader.name} />
@@ -18,6 +20,7 @@ function RenderLeader({leader}) {
            {leader.description}
         </Media>
     </Media>
+    </Stagger>
     );
     
 
